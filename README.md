@@ -1,1 +1,1 @@
-# https---github.com-akif-onder-to-do-list-local-storage
+This is a to do list application with local storage capability.
