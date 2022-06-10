@@ -3,6 +3,10 @@ const input = document.querySelector('.todo_input');
 
 const todoContainer = document.querySelector('.todo_container');
 
+let deleteBtns;
+let checkBoxes;
+
+
 const addHTML = (todo) =>{
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todo');
@@ -56,6 +60,9 @@ const startConf = () => {
         todos.forEach(todo => {
             addHTML(todo);
         });
+        deleteBtns = document.querySelectorAll('.todo_delete');
+        checkBoxes = document.querySelectorAll('.todo_checkbox');
+        
     }
 };
 
@@ -87,4 +94,34 @@ const addTodo = (e) => {
 
 };
 
+
+
+const  deleteTodo = (e) => {
+    const todo =e.target.parentElement.parentElement;
+    const text = todo.firstChild.children[1].textContent;
+    
+    let todos = JSON.parse(localStorage.getItem('todos'));
+    todos = todos.filter(td => td.text != text);
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    todo.remove()
+};
+
+const  completeTodo = (e) => {
+    const todo = e.target.parentElement.parentElement;
+    const text = todo.firstChild.children[1].textContent;
+    
+    let todos = JSON.parse(localStorage.getItem('todos'));
+
+    todos.forEach(td => {
+        if (td.text === text) td.isCompleted = !td.isCompleted;
+    });
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    
+};
+
 form.addEventListener('submit', addTodo);
+deleteBtns.forEach(btn => btn.addEventListener('click', deleteTodo));
+checkBoxes.forEach(btn => btn.addEventListener('click', completeTodo));
