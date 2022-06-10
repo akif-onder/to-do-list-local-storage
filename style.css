@@ -9,6 +9,8 @@ body{
     width: 75%;
     min-height: 100vh;
     margin: 0 auto;
+    background-image: url(./background_image.jpg);
+    background-size: cover;
 }
 
 .container{
