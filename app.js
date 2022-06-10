@@ -71,7 +71,7 @@ const startConf = () => {
 startConf();
 
 const addTodo = (e) => {
-    e.preventDefault(); // when a form is submitted the page is reloaded by default. this function prevents this behavior.
+    // e.preventDefault(); // when a form is submitted the page is reloaded by default. this function prevents this behavior.
     
    const inputValue = input.value;
 
