@@ -5,6 +5,7 @@ const todoContainer = document.querySelector('.todo_container');
 
 let deleteBtns;
 let checkBoxes;
+let editBtns;
 
 
 const addHTML = (todo) =>{
@@ -62,6 +63,7 @@ const startConf = () => {
         });
         deleteBtns = document.querySelectorAll('.todo_delete');
         checkBoxes = document.querySelectorAll('.todo_checkbox');
+        editBtns = document.querySelectorAll('.todo_edit');
         
     }
 };
@@ -118,10 +120,25 @@ const  completeTodo = (e) => {
     });
 
     localStorage.setItem('todos', JSON.stringify(todos));
+};
 
+
+
+
+const  editTodo = (e) => {
+    const todo =e.target.parentElement.parentElement;
+    const text = todo.firstChild.children[1].textContent;
     
+    let todos = JSON.parse(localStorage.getItem('todos'));
+    todos = todos.filter(td => td.text != text);
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    todo.remove()
+
+    input.value = text;
 };
 
 form.addEventListener('submit', addTodo);
 deleteBtns.forEach(btn => btn.addEventListener('click', deleteTodo));
 checkBoxes.forEach(btn => btn.addEventListener('click', completeTodo));
+editBtns.forEach(btn => btn.addEventListener('click', editTodo));
